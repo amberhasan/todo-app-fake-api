@@ -2,9 +2,24 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 
-export default function App() {
+const Counter = () => {
   const [counter, setCounter] = useState(0);
-  const [click, setClick] = useState(false);
+  return (
+    <View>
+      <Button
+        title="Counter"
+        onPress={() => {
+          setCounter(counter + 1);
+        }}
+      />
+
+      <Text>Here is the counter {counter}</Text>
+    </View>
+  );
+};
+
+export default function App() {
+  const [counter, setCounter] = useState(true);
 
   // useEffect(() => {
   //   console.log("Here is the counter", counter);
@@ -29,29 +44,21 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    console.log("I get called when click changed", click);
-  }, [click]);
+    console.log("I get called when click changed", counter);
+  }, [counter]);
 
   console.log("----------------------------------------");
 
   return (
     <View style={styles.container}>
-      <Button
-        title="Counter"
-        onPress={() => {
-          setCounter(counter + 1);
-        }}
-      />
-
-      <Text>Here is the counter {counter}</Text>
-
+      {counter ? <Counter /> : null}
       <Button
         title="Click"
         onPress={() => {
-          setClick(!click);
+          setCounter(!counter);
         }}
       ></Button>
-      <Text>Click click click {click}</Text>
+      <Text>Click click click {counter}</Text>
       <StatusBar style="auto" />
     </View>
   );
