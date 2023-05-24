@@ -4,6 +4,24 @@ import { StyleSheet, Text, View, Button } from "react-native";
 
 const Counter = () => {
   const [counter, setCounter] = useState(0);
+
+  useEffect(() => {
+    console.log("I get called every time state update");
+    return () => {
+      // component will update
+      console.log("I get logged after state update");
+    };
+  });
+
+  useEffect(() => {
+    console.log("DidMount");
+    return () => {
+      console.log("I am going unmount");
+    };
+  }, []);
+
+  console.log("I am mounting...");
+
   return (
     <View>
       <Button
@@ -19,35 +37,35 @@ const Counter = () => {
 };
 
 export default function App() {
-  const [counter, setCounter] = useState(true);
+  const [counter, setCounter] = useState(false);
 
   // useEffect(() => {
   //   console.log("Here is the counter", counter);
   // });
 
-  useEffect(() => {
-    // this is componentDidUpdate()
-    console.log("When state updates I will get called");
-    // return () => {
-    //   console.log(
-    //     "I will get update before the state update component will update"
-    //   );
-    // };
-  });
+  // useEffect(() => {
+  //   // this is componentDidUpdate()
+  //   console.log("When state updates I will get called");
+  //   // return () => {
+  //   //   console.log(
+  //   //     "I will get update before the state update component will update"
+  //   //   );
+  //   // };
+  // });
 
-  useEffect(() => {
-    // this is componentDidMount()
-    console.log("I am component Did Mount, and I only get called once");
-    // return () => {
-    //   console.log("I am unmounting");
-    // };
-  }, []);
+  // useEffect(() => {
+  //   // this is componentDidMount()
+  //   console.log("I am component Did Mount, and I only get called once");
+  //   // return () => {
+  //   //   console.log("I am unmounting");
+  //   // };
+  // }, []);
 
-  useEffect(() => {
-    console.log("I get called when click changed", counter);
-  }, [counter]);
+  // useEffect(() => {
+  //   console.log("I get called when click changed", counter);
+  // }, [counter]);
 
-  console.log("----------------------------------------");
+  // console.log("----------------------------------------");
 
   return (
     <View style={styles.container}>
