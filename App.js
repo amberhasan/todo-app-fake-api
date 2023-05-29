@@ -1,92 +1,19 @@
-import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
-
-const Counter = () => {
-  const [counter, setCounter] = useState(0);
-
-  useEffect(() => {
-    console.log("I get called every time state update");
-    return () => {
-      // component will update
-      console.log("I get logged after state update");
-    };
-  });
-
-  useEffect(() => {
-    console.log("DidMount");
-    return () => {
-      console.log("I am going unmount");
-    };
-  }, []);
-
-  console.log("I am mounting...");
-
-  return (
-    <View>
-      <Button
-        title="Counter"
-        onPress={() => {
-          setCounter(counter + 1);
-        }}
-      />
-
-      <Text>Here is the counter {counter}</Text>
-    </View>
-  );
-};
+import React from "react";
+import UserList from "./UserList";
+import { NavigationContainer } from "@react-navigation/native";
+import { View } from "react-native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 export default function App() {
-  const [counter, setCounter] = useState(false);
-
-  // useEffect(() => {
-  //   console.log("Here is the counter", counter);
-  // });
-
-  // useEffect(() => {
-  //   // this is componentDidUpdate()
-  //   console.log("When state updates I will get called");
-  //   // return () => {
-  //   //   console.log(
-  //   //     "I will get update before the state update component will update"
-  //   //   );
-  //   // };
-  // });
-
-  // useEffect(() => {
-  //   // this is componentDidMount()
-  //   console.log("I am component Did Mount, and I only get called once");
-  //   // return () => {
-  //   //   console.log("I am unmounting");
-  //   // };
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log("I get called when click changed", counter);
-  // }, [counter]);
-
-  // console.log("----------------------------------------");
+  const Stack = createNativeStackNavigator();
 
   return (
-    <View style={styles.container}>
-      {counter ? <Counter /> : null}
-      <Button
-        title="Click"
-        onPress={() => {
-          setCounter(!counter);
-        }}
-      ></Button>
-      <Text>Click click click {counter}</Text>
-      <StatusBar style="auto" />
+    <View style={{ flex: 1 }}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="UserList" component={UserList} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
