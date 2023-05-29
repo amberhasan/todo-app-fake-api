@@ -2,20 +2,18 @@ import { StyleSheet, View, Text, FlatList } from "react-native";
 import { useState, useEffect } from "react";
 import User from "./User";
 
-const UserList = () => {
+const UserList = (props) => {
   const [users, setUsers] = useState([]);
 
   async function getUserData() {
     const response = await fetch("https://jsonplaceholder.typicode.com/users");
     const jsonData = await response.json();
-    console.log(jsonData[0]);
     setUsers(jsonData);
   }
 
   useEffect(() => {
-    // component Did Mount
+    // componentDidMount()
     getUserData();
-    console.log("After the user data");
   }, []);
 
   return (
@@ -23,10 +21,7 @@ const UserList = () => {
       <FlatList
         data={users}
         renderItem={({ item }) => {
-          <User />;
-          console.log("item", item.name);
-          console.log("\n\n\n");
-          return <Text>{item.name}</Text>;
+          return <User data={item} />;
         }}
       />
     </View>

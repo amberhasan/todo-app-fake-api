@@ -1,9 +1,29 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
+const User = function (props) {
+  // console.log("props", props);
+  const navigation = useNavigation();
 
-const User = function () {
-  <View>
-    <Text>Name</Text>
-  </View>;
+  return (
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate("TodoItems", {
+          selectedUserId: props.data.id,
+        });
+      }}
+      style={{
+        padding: 5,
+        justifyContent: "center",
+        alignItems: "center",
+        borderColor: "lightgrey",
+        borderWidth: 1,
+        margin: 5,
+      }}
+    >
+      <Text>{props.data.name}</Text>
+    </TouchableOpacity>
+  );
 };
 
 export default User;
