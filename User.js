@@ -9,6 +9,7 @@ const User = function (props) {
     <TouchableOpacity
       onPress={() => {
         navigation.navigate("TodoItems", {
+          userName: props.data.name,
           selectedUserId: props.data.id,
         });
       }}

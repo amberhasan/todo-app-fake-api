@@ -13,7 +13,11 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="UserList" component={UserList} />
-          <Stack.Screen name="TodoItems" component={TodoItems} />
+          <Stack.Screen
+            name="TodoItems"
+            component={TodoItems}
+            options={({ route }) => ({ title: route.params.userName })}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </View>
