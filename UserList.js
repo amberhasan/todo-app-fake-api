@@ -1,14 +1,16 @@
 import { StyleSheet, View, Text, FlatList } from "react-native";
 import { useState, useEffect } from "react";
 import User from "./User";
+import axios from "axios";
 
 const UserList = (props) => {
   const [users, setUsers] = useState([]);
 
   async function getUserData() {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users");
-    const jsonData = await response.json();
-    setUsers(jsonData);
+    const response = await axios.get(
+      "https://jsonplaceholder.typicode.com/users"
+    );
+    setUsers(response.data);
   }
 
   useEffect(() => {
