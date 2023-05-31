@@ -9,7 +9,7 @@ import {
 
 const TodoItems = (props) => {
   const [todoItems, setTodoItems] = useState([]);
-  const { selectedUserId } = props.route.params;
+  const { selectedUserId, userName } = props.route.params;
 
   async function getUserTodo() {
     const response = await fetch(
@@ -21,6 +21,9 @@ const TodoItems = (props) => {
 
   useEffect(() => {
     // componentDidMount()
+    props.navigation.setOptions({
+      title: userName,
+    });
     getUserTodo();
   }, []);
 
